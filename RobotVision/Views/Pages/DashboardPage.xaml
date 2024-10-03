@@ -1,0 +1,118 @@
+﻿<Page
+    x:Class="RobotVision.Views.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:RobotVision.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ui1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+    Title="DashboardPage"
+    d:DataContext="{d:DesignInstance local:DashboardPage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="600"
+    d:DesignWidth="1100"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d" UseLayoutRounding="False">
+
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Visible" Margin="0,0,0,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="grid" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="0" OverridesDefaultStyle="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="32" />
+                </Grid.RowDefinitions>
+                <ui:Card x:Name="card1" VerticalAlignment="Stretch" Height="NaN" Width="NaN"  Margin="5,5,5,5" Grid.Column="0" AutomationProperties.IsOffscreenBehavior="Onscreen">
+                    <ui:SymbolIcon x:Name="sym" FontSize="300" Symbol="{Binding ViewModel.Symbolimg}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </ui:Card>
+                <ui:Image x:Name="image"  Grid.Column="0"  Source="{Binding ViewModel.Img}" CornerRadius="4" BorderBrush="#33000000" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="10,10,10,10" Grid.IsSharedSizeScope="True" MaxHeight="650" />
+                <ui:ProgressRing HorizontalAlignment="Center" VerticalAlignment="Center" IsIndeterminate="True" Visibility="{Binding ViewModel.Vis}" />
+                <ui:TextBlock Text="{Binding ViewModel.Model1}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,5" Grid.Row="1" />
+                <ui:TextBlock Text="{Binding ViewModel.Unit}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,5" Grid.Row="1" />
+                <ui:Card Grid.Row="1" VerticalAlignment="Stretch" Height="NaN" Width="NaN" Margin="5,0,5,5" Padding="0,0,0,0" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="0.7*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160" />
+                        <RowDefinition />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ui:Button x:Name="Start" Command="{Binding ViewModel.startCommand}" IsEnabled="{Binding ViewModel.Boolstart}" Content="Start"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="NaN" Width="NaN" FontSize="20" Appearance="Primary" Padding="0,0,0,0" Margin="5,5,5,5" />
+                        <ui:Button x:Name="Stop"  Command="{Binding ViewModel.stopCommand}" IsEnabled="{Binding ViewModel.Boolstop}" Content="Stop" HorizontalAlignment="Stretch" Height="NaN" VerticalAlignment="Stretch" Width="NaN" FontSize="20" Padding="0,0,0,0" Grid.Column="1" Margin="5,5,5,5" />
+                    </Grid>
+                    <Grid MaxHeight="200">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <ui:ProgressRing RenderTransformOrigin="0.5,0.5" Progress="{Binding ViewModel.ProOK}"  Foreground="#FF1ED760"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsTabStop="False" IsHitTestVisible="False" Width="145" Height="145" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ui:ProgressRing.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1" />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </ui:ProgressRing.RenderTransform>
+                        </ui:ProgressRing>
+                        <ui:ProgressRing  Grid.Column="1" Grid.Row="1"  Progress="{Binding ViewModel.ProNG}" VerticalContentAlignment="Center" Height="145" Width="145"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" OverridesDefaultStyle="True" Foreground="Red">
+                            <ui:ProgressRing.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="-1" />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform />
+                                </TransformGroup>
+                            </ui:ProgressRing.RenderTransform>
+                        </ui:ProgressRing>
+                        <ui:TextBlock x:Name="LabelOK" FontTypography="Title" Text="{Binding ViewModel.LabelOK}" FontSize="48" Grid.Column="0" Width="NaN" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="0" />
+                        <ui:TextBlock x:Name="LabelNG" FontTypography="Title" Text="{Binding ViewModel.LabelNG}" FontSize="48" Grid.Column="1" Width="NaN" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        <ui:TextBlock FontTypography="Title" Text="OK" FontSize="24" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0" />
+                        <ui:TextBlock FontTypography="Title" Text="Miss" FontSize="24" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,5,0,0" Grid.Column="1" />
+                        <ui:Card x:Name="card" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" Grid.Row="0" HorizontalAlignment="Stretch" Margin="5,0,5,0" Grid.ColumnSpan="2" />
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*" />
+                    <RowDefinition Height="25*" />
+                </Grid.RowDefinitions>
+                <ui:Card x:Name="outputback" VerticalAlignment="Stretch" Height="NaN" Width="NaN"  FontSize="90" HorizontalContentAlignment="Center" Grid.RowSpan="2" Margin="5,5,5,5" Padding="0,5,0,0" Background="{Binding ViewModel.Statuscard}">
+                    <ui:SymbolIcon x:Name="Symboout" Symbol="{Binding ViewModel.Symbol}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="300" />
+                </ui:Card>
+                <TextBlock x:Name="output"  TextWrapping="Wrap" FontSize="160"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2" />
+                <TextBlock Text="Status" FontSize="20" FontWeight="Medium" Margin="10,0,0,0" Grid.Row="0" />
+                <ui:ProgressRing Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Hidden"  Progress="100" Foreground="{Binding ViewModel.Statuscon}" Margin="0,0,10,10" IsEnabled="False" />
+                <TextBlock Text="{Binding ViewModel.Mode}" FontSize="90" FontWeight="Medium" Margin="0,0,0,0" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
