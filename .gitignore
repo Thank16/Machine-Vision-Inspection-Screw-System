@@ -13,6 +13,11 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Python clip maker
+__pycache__/
+*.py[cod]
+output/
+
 # Mono auto generated files
 mono_crash.*
 
